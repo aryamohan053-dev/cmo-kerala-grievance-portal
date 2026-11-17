@@ -18,7 +18,10 @@ app.use(express.json({ limit: '20mb' }));
 app.use(express.urlencoded({ extended: true, limit: '20mb' }));
 
 // Static uploads serving
-const uploadsPath = path.join(__dirname, '..', 'uploads');
+const uploadsPath = path.resolve(
+  process.env.UPLOADS_DIR ||
+  path.join(__dirname, '..', 'uploads')
+);
 if (!fs.existsSync(uploadsPath)) {
   fs.mkdirSync(uploadsPath, { recursive: true });
 }

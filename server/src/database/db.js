@@ -2,7 +2,10 @@ const { DatabaseSync } = require('node:sqlite');
 const path = require('node:path');
 const fs = require('node:fs');
 
-const DB_PATH = process.env.DATABASE_PATH || path.join(__dirname, '..', '..', 'grievance_portal.db');
+const DB_PATH = path.resolve(
+  process.env.DATABASE_PATH ||
+  path.join(__dirname, '..', '..', 'grievance_portal.db')
+);
 
 // Ensure database directory exists
 const dbDir = path.dirname(DB_PATH);

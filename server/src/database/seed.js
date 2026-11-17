@@ -4,6 +4,15 @@ const { db, query, get, run, transaction } = require('./db.js');
 async function seed() {
   console.log('Seeding CMO Kerala Grievance Redressal Portal Database...');
 
+  // Do not overwrite an existing database
+  const existingUsers = get('SELECT COUNT(*) AS count FROM users');
+
+  if (existingUsers.count > 0) {
+    console.log('Database already contains users. Skipping seed.');
+    return;
+  }
+
+ 
   // Clear existing data safely
   db.exec(`
     DELETE FROM citizen_feedback;
